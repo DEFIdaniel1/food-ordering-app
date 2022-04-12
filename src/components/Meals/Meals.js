@@ -1,10 +1,10 @@
 import AvailableMeals from "./AvailableMeals";
-import MealsSummary from './MealsSummary';
+import PageIntro from "./PageIntro";
 
 const Meals = () => {
     return (
       <>
-        <MealsSummary />
+        <PageIntro />
         <AvailableMeals />
       </>
     );
