@@ -6,12 +6,12 @@ const MealsSummary = props => {
       <section className={classes.summary}>
         <h2>Food for the Heroes We Deserve</h2>
         <p>
-          Choose your favorite meal from our broad 
-          selection of available superhero friendly meals.
+          Choose your favorite meal from our  
+          selection of superhero-friendly meals.
         </p>
         <p>
-          All our meals are cooked with high-quality ingredients, just-in-time
-          and of course by experienced kitchen heroes!
+          All our meals are cooked with high-quality ingredients 
+          by experienced kitchen heroes!
         </p>
       </section>
     );
