@@ -11,12 +11,33 @@ const defaultCartState = {
 const cartReducer = (state, action) => {
   switch(action.type) {
     case 'ADD_ITEM': 
-      const updatedItems = state.items.concat(action.item);//like push, but outputs a NEW array
-      const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
+      const updatedTotalAmount =
+        state.totalAmount + action.item.price * action.item.amount;
+        //calculates total cart amount
+
+      const existingCartItemIndex = state.items.findIndex(
+        (item) => item.id === action.item.id);
+      //findIndex returns true if exists when it matches the item.id we're currenly adding
+      const existingCartItem = state.items[existingCartItemIndex];
+      //positions index at the point of the existing item
+      let updatedItems;
+
+      if(existingCartItem) {
+        const updatedItem = {
+          ...existingCartItem,
+          amount: existingCartItem.amount + action.item.amount
+        };
+        updatedItems = [...state.items];
+        updatedItems[existingCartItemIndex] = updatedItem;
+      } else {
+          updatedItems = state.items.concat(action.item);//like push, but outputs a NEW array
+      }
+
       return {
         items: updatedItems,
         totalAmount: updatedTotalAmount
       };
+
     case 'REMOVE_ITEM':
       return{};
     default:
