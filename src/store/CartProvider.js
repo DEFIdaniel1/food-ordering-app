@@ -9,7 +9,7 @@ const defaultCartState = {
 //dispatchFun for useReducer - outside component b/c it doesn't need anything in the
 //comp and shouldn't be recreated everytime the state is evaluated
 const cartReducer = (state, action) => {
-  switch(action) {
+  switch(action.type) {
     case 'ADD_ITEM': 
       const updatedItems = state.items.concat(action.item);//like push, but outputs a NEW array
       const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;

@@ -4,7 +4,6 @@ import Header from './components/Layout/Header';
 import Meals from './components/Meals/Meals';
 import Cart from './components/Cart/Cart';
 import CartProvider from './store/CartProvider';
-import Counter from './store/reducerTest';
 
 
 function App() {
@@ -19,7 +18,6 @@ function App() {
 
   return (
     <div>
-      <Counter />
       <CartProvider>
         {showCart && <Cart onClose={closeCartHandler} />}
         <Header onShowCart={showCartHandler} />
