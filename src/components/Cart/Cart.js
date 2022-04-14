@@ -11,8 +11,13 @@ const Cart = props => {
   const totalAmount = cartCtx.totalAmount;
   const hasItems = cartCtx.items.length > 0;
   
-  const removeCartItemHandler = () => {};
-  const addCartItemHandler = () => {};
+  const removeCartItemHandler = (id) => {
+    cartCtx.removeItem(id);
+  };
+  const addCartItemHandler = (item) => {
+    cartCtx.addItem({...item, amount: 1});
+    //pass through all item info + adding 1 amount to the cart for the "+" button
+  };
 
   const cartItems = (
     <ul className={classes["cart-items"]}>
@@ -22,6 +27,7 @@ const Cart = props => {
           name={item.name}
           price={item.price}
           amount={item.amount}
+          //passed to + and - buttons in the CartItem
           //need to bind below and give the item to pass through -id and item respectively
           onRemove={removeCartItemHandler.bind(null, item.id)}
           onAdd={addCartItemHandler.bind(null, item)}

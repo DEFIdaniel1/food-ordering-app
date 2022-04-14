@@ -20,3 +20,10 @@
   color: #2c65c1;
   font-size: 1.25rem;
 }
+
+.img-small {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+
+}
