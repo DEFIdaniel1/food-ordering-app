@@ -3,7 +3,7 @@ import CartContext from './cart-context';
 
 const defaultCartState = {
   items: [],
-  totalAmount: 0
+  totalAmount: 0,
 };
 
 //dispatchFun for useReducer - outside component b/c it doesn't need anything in the
@@ -18,7 +18,7 @@ const cartReducer = (state, action) => {
         (item) => item.id === action.item.id
       );
       //findIndex returns true if exists when it matches the item.id we're currenly adding
-      let existingCartItem = state.items[existingCartItemIndex];
+      const existingCartItem = state.items[existingCartItemIndex];
       //positions index at the point of the existing item
       let updatedItems;
 
