@@ -27,7 +27,7 @@ const HeaderCartButton = props => {
       return () => {
         clearTimeout(timer); //cleanup function
       }
-    }, [items]);
+    }, [items]);//initiates anytime item value changes - upon add to cart
 
     return (
       <button onClick={props.onClick} className={btnClasses}>
