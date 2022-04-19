@@ -1,7 +1,6 @@
 import { useContext } from "react";
 
 import Modal from "../UI/Modal";
-import Card from "../UI/Card";
 import classes from "./CheckoutForm.module.css";
 import CartContext from "../../store/cart-context";
 import useInput from "../Hooks/use-input";
