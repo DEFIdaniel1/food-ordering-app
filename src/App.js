@@ -18,6 +18,8 @@ function App() {
   const [showCheckout, setShowCheckout] = useState(false);
   const showCheckoutHandler = () => {
     setShowCheckout(true);
+    setShowCart(false);
+
   };
   const closeCheckoutHandler = () => {
     setShowCheckout(false);

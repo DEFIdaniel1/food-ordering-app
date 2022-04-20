@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import Modal from "../UI/Modal";
 import classes from "./CheckoutForm.module.css";
@@ -8,6 +8,11 @@ import useInput from "../Hooks/use-input";
 const CheckoutForm = (props) => {
   const cartCtx = useContext(CartContext);
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
+  const [httpError, setHttpError] = useState(null);
+
   const inputNotEmpty = (value) => value.trim() !== "";
   const emailValidation = value => value.includes("@");
   const postalCodeValidation = (value) =>
@@ -19,7 +24,6 @@ const CheckoutForm = (props) => {
     isValid: firstNameIsValid,
     onChangeHandler: firstNameChangeHanlder,
     onBlurHandler: firstNameBlurHandler,
-    reset: resetFirstName,
   } = useInput(inputNotEmpty);
 
   const {
@@ -28,7 +32,6 @@ const CheckoutForm = (props) => {
     isValid: lastNameIsValid,
     onChangeHandler: lastNameChangeHanlder,
     onBlurHandler: lastNameBlurHandler,
-    reset: resetLastName,
   } = useInput(inputNotEmpty);
 
   const {
@@ -37,7 +40,6 @@ const CheckoutForm = (props) => {
     isValid: emailIsValid,
     onChangeHandler: emailChangeHanlder,
     onBlurHandler: emailBlurHandler,
-    reset: resetEmail,
   } = useInput(emailValidation);
 
   const {
@@ -46,7 +48,6 @@ const CheckoutForm = (props) => {
     isValid: streetIsValid,
     onChangeHandler: streetChangeHanlder,
     onBlurHandler: streetBlurHandler,
-    reset: resetStreet,
   } = useInput(inputNotEmpty);
 
   const {
@@ -55,7 +56,6 @@ const CheckoutForm = (props) => {
     isValid: cityIsValid,
     onChangeHandler: cityChangeHanlder,
     onBlurHandler: cityBlurHandler,
-    reset: resetCity,
   } = useInput(inputNotEmpty);  
   
   const {
@@ -64,7 +64,6 @@ const CheckoutForm = (props) => {
     isValid: postalCodeIsValid,
     onChangeHandler: postalCodeChangeHanlder,
     onBlurHandler: postalCodeBlurHandler,
-    reset: resetPostalCode,
   } = useInput(postalCodeValidation);          
 
   let formIsValid = false;
@@ -72,40 +71,55 @@ const CheckoutForm = (props) => {
       formIsValid = true;
   }
 
+  const httpFormPost = async() => {
+    setIsSubmitting(true);
+    setHttpError(null);
+    const userData = {
+            firstName: firstNameValue,
+            lastName: lastNameValue,
+            email: emailValue,
+            street: streetValue,
+            city: cityValue,
+            postalCode: postalCodeValue
+    }
+
+
+    try {
+      const response = await fetch(
+        "https://react-http-89657-default-rtdb.firebaseio.com/SMorders.json",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            userData,
+            orderedItems: cartCtx.items,
+          }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error ("Sorry... Something went wrong.")
+      }
+    }
+    catch (error) {
+      setHttpError(error.message);
+    }
+
+    cartCtx.clearCart();
+    setIsSubmitting(false);
+    setDidSubmit(true);
+  }
+
   const submitFormHandler = (event) => {
     event.preventDefault();
-    
+
     if(!formIsValid) {
       return;
     }
 
-    const userData = {
-      firstName: firstNameValue,
-      lastName: lastNameValue,
-      email: emailValue,
-      street: streetValue,
-      city: cityValue,
-      postalCode: postalCodeValue,
-    };
-
-    fetch("https://react-http-89657-default-rtdb.firebaseio.com/SMorders.json", {
-      method: "POST",
-      body: JSON.stringify({
-        userData,
-        orderedItems: cartCtx.items
-      })
-    })
-    
-    resetFirstName();
-    resetLastName();
-    resetEmail();
-    resetStreet();
-    resetCity();
-    resetPostalCode();
+    httpFormPost();
   }
 
-  return (
-    <Modal onClose={props.onClose}>
+  const checkoutContent = (
+    <>
       <form className={classes.form} onSubmit={submitFormHandler}>
         <div className={classes.heading}>
           <span>Billing Information</span>
@@ -241,6 +255,32 @@ const CheckoutForm = (props) => {
           </button>
         </div>
       </form>
+    </>
+  );
+
+  const submittingContent = (
+    <p className={classes.heading}>Sending order data...</p>
+  );
+
+  const didSubmitContnet = (
+    <div className={classes.actions}>
+      <p className={classes.heading}>Your order has been received!</p>
+      <button className={classes.button} onClick={props.onClose}>Okay!</button>
+    </div>
+  );
+
+  const errorContent = (
+    <p className={`${classes["error-text"]} + ${classes.heading}`}>
+      {httpError}
+    </p>
+  );
+
+  return (
+    <Modal onClose={props.onClose}>
+      {!isSubmitting && !didSubmit && !httpError && checkoutContent}
+      {isSubmitting && !httpError && submittingContent}
+      {!isSubmitting && didSubmit && !httpError && didSubmitContnet}
+      {httpError && errorContent}
     </Modal>
   );
 };

@@ -61,6 +61,10 @@ const cartReducer = (state, action) => {
         //overwrites the current item in the array with the new "updatedItem" value
       };
 
+      if (action.type === "CLEAR") {
+        return defaultCartState;
+      };
+
       return {
         items: updatedItems,
         totalAmount: updatedTotalAmount,
@@ -86,11 +90,16 @@ const CartProvider = props => {
     dispatchCartAction({type: 'REMOVE_ITEM', id: id}) //forward ID
   };
 
+  const clearCartHandler = () => {
+    dispatchCartAction({type: "CLEAR"})
+  };
+
     const cartContext = {
       items: cartState.items,
       totalAmount: cartState.totalAmount,
       addItem: addItemToCartHandler, 
-      removeItem: removeItemFromCartHandler 
+      removeItem: removeItemFromCartHandler,
+      clearCart: clearCartHandler
     };
     
     return (
