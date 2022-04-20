@@ -109,7 +109,12 @@
   color: white;
 }
 
-.actions .button .disabled {
-  color: black;
-  background-color: black;
+.actions .button:disabled {
+  color: rgb(95, 95, 95);
+  background-color: #ccc;
+  border-color: #ccc;
+}
+
+.error-text {
+  color: red;
 }

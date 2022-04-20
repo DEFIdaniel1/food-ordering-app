@@ -15,14 +15,13 @@ function App() {
   const closeCartHandler = () => {
     setShowCart(false);
   }
-
-    const [showCheckout, setShowCheckout] = useState(false);
-    const showCheckoutHandler = () => {
-      setShowCheckout(true);
-    };
-    const closeCheckoutHandler = () => {
-      setShowCheckout(false);
-    };
+  const [showCheckout, setShowCheckout] = useState(false);
+  const showCheckoutHandler = () => {
+    setShowCheckout(true);
+  };
+  const closeCheckoutHandler = () => {
+    setShowCheckout(false);
+  };
 
   return (
     <div>
