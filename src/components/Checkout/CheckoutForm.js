@@ -38,15 +38,15 @@ const CheckoutForm = (props) => {
       reset: resetEmail,
     } = useInput(emailValidation);
 
-  const firstNameClasses = firstNameHasError
-    ? "form-control invalid"
-    : "form-control";
+  // const firstNameClasses = firstNameHasError
+  //   ? "form-control invalid"
+  //   : "form-control";
 //   const lastNameClasses = lastNameIsValid
 //     ? classes["input-form"]
 //     : classes["input-form invalid"];
-  const emailClasses = emailIsValid 
-    ? classes["input-form"] 
-    : classes["input-form invalid"];
+  // const emailClasses = emailIsValid 
+  //   ? classes["input-form"] 
+  //   : classes["input-form invalid"];
 
   let formIsValid = false;
   if (firstNameIsValid && lastNameIsValid && emailIsValid) {
@@ -65,63 +65,81 @@ const CheckoutForm = (props) => {
 
   return (
     <Modal onClose={props.onClose}>
-        <form onSubmit={submitFormHandler}>
-          <div className={firstNameClasses}>
-            <label htmlFor="firstName">First Name</label>
-            <input
-              type="text"
-              onBlur={firstNameBlurHandler}
-              onChange={firstNameChangeHanlder}
-              value={firstNameValue}
-            />
-            {firstNameHasError && (
-              <p className={classes["error-text"]}>
-                Please input a valid first name.
-              </p>
-            )}
-          </div>
-          <div className="form-control">
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
-              onBlur={lastNameBlurHandler}
-              onChange={lastNameChangeHanlder}
-              value={lastNameValue}
-            />
-            {lastNameHasError && (
-              <p className={classes["error-text"]}>
-                Please input a valid last name.
-              </p>
-            )}
-          </div>
-          <div className={emailClasses}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              onBlur={emailBlurHandler}
-              onChange={emailChangeHanlder}
-              value={emailValue}
-            />
-            {emailHasError && (
-              <p className={classes["error-text"]}>
-                Please input a valid email.
-              </p>
-            )}
-          </div>
-          <div>
-            <label htmlFor="address">Billing Address</label>
-            <input type="text" />
-          </div>
-          <div>
-            <label htmlFor="creditCard">Credit Card Number</label>
-            <input type="text" />
-          </div>
-          <button disabled={!formIsValid} onClick={props.onClose}>Submit</button>
-          <div className={classes.total}>
-            <span>Total Amount</span>
-            <span>{totalAmount}</span>
-          </div>
-        </form>
+      <form className={classes.form} onSubmit={submitFormHandler}>
+        <div className={classes.heading}>
+          <span>Billing Information</span>
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="firstName">First Name</label>
+          <input
+            type="text"
+            id="first name"
+            onBlur={firstNameBlurHandler}
+            onChange={firstNameChangeHanlder}
+            value={firstNameValue}
+          />
+          {firstNameHasError && (
+            <p className={classes["error-text"]}>
+              Please input a valid first name.
+            </p>
+          )}
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            id="last name"
+            onBlur={lastNameBlurHandler}
+            onChange={lastNameChangeHanlder}
+            value={lastNameValue}
+          />
+          {lastNameHasError && (
+            <p className={classes["error-text"]}>
+              Please input a valid last name.
+            </p>
+          )}
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            onBlur={emailBlurHandler}
+            onChange={emailChangeHanlder}
+            value={emailValue}
+          />
+          {emailHasError && (
+            <p className={classes["error-text"]}>Please input a valid email.</p>
+          )}
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="street">Street</label>
+          <input type="text" />
+          <label htmlFor="city">City</label>
+          <input type="text" />
+          <label htmlFor="postal code">Postal Code</label>
+          <input type="text" />
+        </div>
+        <div className={classes.total}>
+          <span>Total: {totalAmount}</span>
+        </div>
+        <div className={classes.actions}>
+          <button
+            className={classes["button--alt"]}
+            onClick={props.onClose}
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            className={classes.button}
+            disabled={!formIsValid}
+            onClick={props.onClose}
+          >
+            Submit
+          </button>
+        </div>
+      </form>
     </Modal>
   );
 };
