@@ -1,0 +1,45 @@
+.banned {
+  display: flex;
+  padding: -4rem 1rem 1rem 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  background-color: rgb(221, 221, 221);
+  max-width: 60rem;
+  width: 90%;
+  margin: 2rem auto;
+  padding-top: -2rem;
+  color: red;
+  text-align: center;
+  animation: banned-appear 1s ease-out forwards;
+}
+
+.h1 {
+  font-size: 4rem;
+  transform: rotateZ(-5deg) translateY(200%) translateX(-1rem);
+  color: rgb(255, 0, 0);
+  text-shadow: -1px -1px 0 rgb(0, 0, 0), 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.h3 {
+  font-size: 2rem;
+  margin-top: -6rem;
+}
+
+.img {
+  align-self: center;
+  border-radius: 60%;
+  width: 90%;
+}
+
+@keyframes banned-appear {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

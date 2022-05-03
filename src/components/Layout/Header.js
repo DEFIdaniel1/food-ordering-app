@@ -1,6 +1,6 @@
 import React from 'react';
 
-import heroFoodImage from '../../assets/wonder-fries.jpeg';
+import heroFoodImage from '../../assets/heroes-crop.jpeg';
 import classes from './Header.module.css';
 import HeaderCartButton from './HeaderCartButton';
 

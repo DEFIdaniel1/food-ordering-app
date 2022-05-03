@@ -5,6 +5,7 @@ import Meals from './components/Meals/Meals';
 import Cart from './components/Cart/Cart';
 import CartProvider from './store/CartProvider';
 import CheckoutForm from './components/Checkout/CheckoutForm';
+import Footer from './components/Layout/Footer';
 
 
 function App() {
@@ -40,6 +41,8 @@ function App() {
           <Meals />
         </main>
       </CartProvider>
+      {/* <Banned /> */}
+      <Footer />
     </div>
   );
 }

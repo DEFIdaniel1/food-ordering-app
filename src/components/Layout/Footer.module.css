@@ -1,0 +1,31 @@
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #2c65c1;
+  color: white;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.left {
+  display: flexbox;
+  vertical-align: top;
+  width: 30%;
+}
+
+.center {
+  display: flexbox;
+  vertical-align: top;
+  left: 100px;
+  min-width: 40%;
+  padding: 0 5%;
+}
+
+.right {
+  display: flexbox;
+  vertical-align: top;
+  width: 30%;
+}
