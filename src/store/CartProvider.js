@@ -6,6 +6,8 @@ const defaultCartState = {
   totalAmount: 0,
 };
 
+
+
 //dispatchFun for useReducer - outside component b/c it doesn't need anything in the
 //comp and shouldn't be recreated everytime the state is evaluated
 const cartReducer = (state, action) => {
