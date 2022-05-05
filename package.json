@@ -1,9 +1,6 @@
 {
-<<<<<<< Updated upstream
-=======
   "homepage": "https://super-meals.web.app/",
   "site": "super-meals",
->>>>>>> Stashed changes
   "name": "react-complete-guide",
   "version": "0.1.0",
   "private": true,
