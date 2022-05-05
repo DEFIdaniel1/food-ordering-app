@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "super-meals",
     "public": "build",
     "ignore": [
       "firebase.json",
